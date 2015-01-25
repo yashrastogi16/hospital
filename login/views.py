@@ -68,7 +68,11 @@ def patientrecord(request):
 	list1 = patient.objects.all()
 	content = {'lists' : list1}
 	return render_to_response('patientrecord.html',content,context_instance=RequestContext(request))
-	
+
+def managepatient(request):
+	content = {}
+	return render_to_response('managepatient.html',content,context_instance=RequestContext(request))
+
 def registerpatient(request):
 	content = {}
 	abc = doctor.objects.all()
