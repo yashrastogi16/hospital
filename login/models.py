@@ -33,7 +33,7 @@ class disease(models.Model):
 
 class image(models.Model):
 	patient = models.ForeignKey('patient')
-	image = models.ImageField(upload_to="static/static/img/", null=True, blank=True)
+	image = models.FileField(upload_to="static/static/img/", null=True, blank=True)
 	def __unicode__(self):
 		return smart_unicode(self.id)
 

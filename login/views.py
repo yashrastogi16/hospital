@@ -99,3 +99,6 @@ def registerpatient(request):
 			content['err_msg'] = msg
 			return render_to_response('registerpatient.html',content,context_instance=RequestContext(request))
 	return render_to_response('registerpatient.html',content,context_instance=RequestContext(request))
+
+def individual(request):
+	return render_to_response('individual.html')
