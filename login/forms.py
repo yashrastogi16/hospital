@@ -7,3 +7,8 @@ class master_adminForm(forms.ModelForm):
 	class Meta:
 		model = master_admin
 		fields = '__all__'
+
+class patientForm(forms.ModelForm):
+	class Meta:
+		model = patient
+		fields = '__all__'

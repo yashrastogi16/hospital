@@ -19,7 +19,7 @@ class patient(models.Model):
 class doctor(models.Model):
 	doctorname = models.CharField(max_length=50)
 	def __unicode__(self):
-		return smart_unicode(self.id)
+		return smart_unicode(self.doctorname)
 
 class disease(models.Model):
 	patient = models.ForeignKey('patient')

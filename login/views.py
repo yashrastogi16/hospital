@@ -19,10 +19,6 @@ def base(request):
 
 def home(request):
 	return render_to_response('home.html')
-
-def registerpatient(request):
-	return render_to_response('registerpatient.html')
-
 def login(request):
 	content = {}
 	content['err_msg'] = 'Please Login with your username or password'
@@ -40,13 +36,23 @@ def login(request):
 			request.session['user'] = userobj
 			sess_ob = request.session['user']
 			print userobj.firstname
-			content['name'] = sess_ob.firstname
-			content['id'] = sess_ob.id
-			return render_to_response('managepatient.html', content, context_instance=RequestContext(request))
+			list1 = patient.objects.all()
+			content = {'lists' : list1}
+			return render_to_response('patientrecord.html', content, context_instance=RequestContext(request))
 		else:
 			content['err_msg'] = 'Invalid username or password'
 		return render_to_response('login.html', content, context_instance=RequestContext(request))
 	return render_to_response('login.html', content, context_instance=RequestContext(request))
+
+@user_login_required
+def logout(request):
+	content = {}
+	user = request.session['user']
+	session_keys = request.session.keys()
+	for key in session_keys:
+		print "del"
+		del request.session[key]
+	return render_to_response('home.html', content, context_instance=RequestContext(request))
 
 def adminregister(request):
 	content = {}
@@ -56,19 +62,36 @@ def adminregister(request):
 		save_it.save()
 		return HttpResponseRedirect('/admin_login')
 	return render_to_response('adminregister.html',locals(),context_instance=RequestContext(request))
-
-def managepatient(request):
-	content = {}
-	return render_to_response('managepatient.html',content,context_instance=RequestContext(request))
-
 @user_login_required
-def logout(request):
+def patientrecord(request):
 	content = {}
-	user = request.session['user']
-	session_keys = request.session.keys()
-	# form = UserForm(request.POST)
-	for key in session_keys:
-		print "del"
-		del request.session[key]
-	content['err_msg'] = 'Succesfully Logged Out !!!'
-	return render_to_response('login.html', content, context_instance=RequestContext(request))
+	list1 = patient.objects.all()
+	content = {'lists' : list1}
+	return render_to_response('patientrecord.html',content,context_instance=RequestContext(request))
+	
+def registerpatient(request):
+	content = {}
+	abc = doctor.objects.all()
+	content = {'doctor1': abc}
+	if request.method == 'POST':
+		firstname = request.POST.get('firstname')
+		lastname = request.POST.get('lastname')
+		age = request.POST.get('age')
+		mobile = request.POST.get('mobile')
+		date = request.POST.get('date')
+		email = request.POST.get('email')
+		city = request.POST.get('city')
+		doctor1 = request.POST.get('doctor1')
+		try:
+			print doctor1
+			doc = doctor.objects.get(doctorname=doctor1)
+			print type(doc)
+			patientregister = patient.objects.create(firstname=firstname,lastname=lastname,age=age,mobile=mobile,date=date,email=email,city=city,doctor=doc)
+			msg = "Registered successfully"
+			return render_to_response('home.html',content,context_instance=RequestContext(request)) 
+		except Exception as e:
+			print e
+			msg = "Registration Failed"
+			content['err_msg'] = msg
+			return render_to_response('registerpatient.html',content,context_instance=RequestContext(request))
+	return render_to_response('registerpatient.html',content,context_instance=RequestContext(request))
