@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<form class="form-inline" method="post" >
+{% csrf_token %}
+                <center>
+                {{ form.as_p }}
+                <div class="clearfix"></div><br>
+				<button type="submit" class="btn btn-primary">Submit</button>
+				</center> 
+{% endblock %}

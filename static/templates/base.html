@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="static/image/favicon.ico" type="image/x-icon">	
+    <title>Hospital Management System</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="jumbotron.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="float: center;">
+     <center>
+        <div class="navbar-header" style="float: left;">
+          <a class="navbar-brand" href="/">Hospital Management System</a>
+     	</div>
+     	<div class="navbar-header" style="float: right;">   
+        <ul class="nav nav-pills">
+        <li role="presentation" ><a href = '/home/'>Home</a></li>
+        <li role="presentation" ><a href = '/admin_login/'>Admin Login</a></li>
+        </ul>
+        </div>
+        </center>
+    </nav>
+<br/><br/><br><br><br>
+<div class="container">
+		{% block content %}
+
+		{% endblock %}
+		</div>
+	
+    <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>
